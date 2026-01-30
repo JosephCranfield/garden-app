@@ -1,30 +1,33 @@
-// Hardcoded values for the season and plant type
-let season = "summer"; // TODO: Replace with prompt() to allow user interaction.
-let plantType = "flower"; // TODO: Replace with prompt() to allow user interaction.
+// Refactored gardening advice app
 
-// Variable to hold gardening advice
-let advice = "";
+// Prompt user for season and plant type
+let season = prompt("Enter the season (summer, winter, etc.):").toLowerCase();
+let plantType = prompt("Enter the plant type (flower, vegetable):").toLowerCase();
 
-// Determine advice based on the season
-if (season === "summer") {
-    advice += "Water your plants regularly and provide some shade.\n";
-} else if (season === "winter") {
-    advice += "Protect your plants from frost with covers.\n";
-} else {
-    advice += "No advice for this season.\n";
+// Object to store advice
+const adviceData = {
+    summer: {
+        flower: "Water your plants regularly and provide some shade.\nUse fertiliser to encourage blooms.",
+        vegetable: "Water your plants regularly and provide some shade.\nKeep an eye out for pests!"
+    },
+    winter: {
+        flower: "Protect your plants from frost with covers.\nUse fertiliser to encourage blooms.",
+        vegetable: "Protect your plants from frost with covers.\nKeep an eye out for pests!"
+    }
+};
+
+// Function to get advice
+function getAdvice(season, plantType) {
+    if (adviceData[season] && adviceData[season][plantType]) {
+        return adviceData[season][plantType];
+    } else {
+        return "No advice available for this season or plant type.";
+    }
 }
 
-// Determine advice based on the plant type
-if (plantType === "flower") {
-    advice += "Use fertiliser to encourage blooms.";
-} else if (plantType === "vegetable") {
-    advice += "Keep an eye out for pests!";
-} else {
-    advice += "No advice for this type of plant.";
-}
+// Log advice to console
+console.log(getAdvice(season, plantType));
 
-// Log the generated advice to the console
-console.log(advice);
 
 // TODO: Examples of possible features to add:
 // - Add detailed comments explaining each block of code.
