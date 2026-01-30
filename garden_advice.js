@@ -1,30 +1,66 @@
-// Hardcoded values for the season and plant type
-let season = "summer"; // TODO: Replace with prompt() to allow user interaction.
-let plantType = "flower"; // TODO: Replace with prompt() to allow user interaction.
+// Garden Advice App - Enhanced Documentation
+// This script provides gardening advice based on the season and plant type.
+// Branch 2 enhancements:
+// - Added detailed  explaining each code block
+// - Expanded advice for spring and autumn
+// - Included tips for herbs
+// - Added TODOs for future improvements
+comments
+// Prompt user for inputs
 
-// Variable to hold gardening advice
-let advice = "";
+// Ask user for the current season and plant type
+let season = prompt("Enter the season (summer, winter, spring, autumn):").toLowerCase();
+let plantType = prompt("Enter the plant type (flower, vegetable, herb):").toLowerCase();
 
-// Determine advice based on the season
-if (season === "summer") {
-    advice += "Water your plants regularly and provide some shade.\n";
-} else if (season === "winter") {
-    advice += "Protect your plants from frost with covers.\n";
-} else {
-    advice += "No advice for this season.\n";
+// Advice data object
+
+// Stores gardening advice for different seasons and plant types
+// Using an object makes it easier to update or expand advice
+const adviceData = {
+    summer: {
+        flower: "Water your plants regularly and provide some shade.\nUse fertiliser to encourage blooms.",
+        vegetable: "Water your plants regularly and provide some shade.\nKeep an eye out for pests!",
+        herb: "Ensure herbs get enough sunlight and moderate water."
+    },
+    winter: {
+        flower: "Protect your plants from frost with covers.\nUse fertiliser to encourage blooms.",
+        vegetable: "Protect your plants from frost with covers.\nKeep an eye out for pests!",
+        herb: "Consider indoor planting or frost protection for herbs."
+    },
+    spring: {
+        flower: "Spring is great for planting flowers.\nUse compost to enrich soil and encourage growth.",
+        vegetable: "Plant early vegetables and monitor soil moisture.\nUse organic fertiliser for best results.",
+        herb: "Start new herb seedlings and provide consistent water.\nRotate herbs to prevent overgrowth."
+    },
+    autumn: {
+        flower: "Prune flowers and remove dead blooms.\nPrepare garden beds for winter.",
+        vegetable: "Harvest late-season vegetables and prepare soil for next planting season.",
+        herb: "Trim herbs and store seeds for next season.\nConsider indoor overwintering for sensitive herbs."
+    }
+};
+
+
+// Function: getAdvice
+
+// This function retrieves advice based on the season and plant type.
+// If the combination is not available, it returns a default message.
+function getAdvice(season, plantType) {
+    if (adviceData[season]) {                   // Check if season exists
+        if (adviceData[season][plantType]) {    // Check if plant type exists
+            return adviceData[season][plantType]; // Return corresponding advice
+        } else {
+            return "No advice available for this type of plant.";
+        }
+    } else {
+        return "No advice available for this season.";
+    }
 }
 
-// Determine advice based on the plant type
-if (plantType === "flower") {
-    advice += "Use fertiliser to encourage blooms.";
-} else if (plantType === "vegetable") {
-    advice += "Keep an eye out for pests!";
-} else {
-    advice += "No advice for this type of plant.";
-}
 
-// Log the generated advice to the console
-console.log(advice);
+// Generate and display advice
+
+let advice = getAdvice(season, plantType);
+console.log("Gardening Advice:\n" + advice);
 
 // TODO: Examples of possible features to add:
 // - Add detailed comments explaining each block of code.
